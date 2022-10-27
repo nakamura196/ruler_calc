@@ -20,3 +20,8 @@ Fill me in please! Don’t forget code examples:
 path = "data/612110.jpeg"
 ApiClient.main(path)
 ```
+
+``` python
+path = "data/IiReU.jpeg"
+ApiClient.main(path)
+```

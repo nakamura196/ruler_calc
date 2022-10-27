@@ -5,63 +5,62 @@ __all__ = ['ApiClient']
 
 # %% ../api.ipynb 3
 import numpy as np
-from PIL import Image
-from PIL import ImageFile
+from PIL import Image, ImageFile
 ImageFile.LOAD_TRUNCATED_IMAGES = True
-import torch
-from urllib import request
 import json
-import requests
 import os
-import warnings
-warnings.filterwarnings("ignore")
 from pylsd.lsd import lsd
 import cv2
 from scipy.signal import argrelmin, argrelmax
 import statistics
-
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-# %% ../api.ipynb 5
+# %% ../api.ipynb 4
 class ApiClient:
-    def __init__(self, path, tmp_dir = "tmp"):
+    def __init__(self, path, tmp_dir = "tmp", isHorizontal = True):
         self.input_path = path
         self.tmp_dir = tmp_dir
+        self.isHorizontal = isHorizontal
         os.makedirs(tmp_dir, exist_ok=True)
         pass
 
-    @staticmethod
-    def main(path, tmp_dir = "tmp"):
-        ins = ApiClient(path, tmp_dir)
-        otsu_path = tmp_dir + "/otsu.png"
-        ApiClient.otsu(path, otsu_path)
-        # self.path = path
+    def main2(self):
+        '''
+        メイン処理
+        '''
+        self.otsu()
+        self.skelton()
+        self.hlsd()
 
     @staticmethod
-    def otsu(input_path, output_path):
+    def main(path, tmp_dir = "tmp", isHorizontal = True):
+        ins = ApiClient(path, tmp_dir = tmp_dir, isHorizontal = isHorizontal)
+        ins.main2()
+
+    
+    def otsu(self):
         '''
         大津の二値化
         '''
 
-        img = cv2.imread(input_path)
+        img = cv2.imread(self.input_path)
         gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
         ret2, img_otsu = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU)
 
-        cv2.imwrite(output_path, img_otsu)
+        # cv2.imwrite(output_path, img_otsu)
 
-        # otsu_path = self.tmp_dir + "/otsu.jpg"
-        # cv2.imwrite(otsu_path, img_otsu)
-        # self.otsu_path = otsu_path
+        otsu_path = self.tmp_dir + "/otsu.jpg"
+        cv2.imwrite(otsu_path, img_otsu)
+        self.otsu_path = otsu_path
 
-    @staticmethod
-    def skelton(input_path, output_path):
+    def skelton(self):
         '''
         細線化
         '''
 
-        img = cv2.imread(input_path)
+        img = cv2.imread(self.otsu_path)
         gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 
         # 二値画像反転
@@ -69,4 +68,41 @@ class ApiClient:
 
         skelton = cv2.ximgproc.thinning(image, thinningType=cv2.ximgproc.THINNING_ZHANGSUEN)
 
+        output_path = self.tmp_dir + "/skelton.jpg"
+
         cv2.imwrite(output_path, skelton)
+
+        self.skelton_path = output_path
+
+    def hlsd(self, isHorizontal = True):
+        '''
+        LSDを使って横線を抽出
+        '''
+
+        img = cv2.imread(self.input_path)
+        gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+        # 二値画像反転
+        image = cv2.bitwise_not(gray)
+
+        # 画像をグレースケールに変換
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        # LSDを使って線分を抽出
+        lines = lsd(gray)
+
+        # 抽出した線分を描画
+        for i in range(lines.shape[0]):
+            pt1 = (int(lines[i, 0]), int(lines[i, 1]))
+            pt2 = (int(lines[i, 2]), int(lines[i, 3]))
+            width = lines[i, 4]
+            cv2.line(img, pt1, pt2, (0, 0, 255), int(np.ceil(width / 2)))
+
+        # 画像を表示
+        cv2.imwrite(self.tmp_dir + "/hlsd.jpg", img)
+
+        # 横線のみ抽出
+        if isHorizontal:
+            lines = lines[lines[:, 1] == lines[:, 3]]
+
+        return lines
