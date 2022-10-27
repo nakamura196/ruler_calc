@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "ruler_calc"
+  site-url: "https://nakamura196.github.io/ruler_calc"
+  description: ""
+  repo-branch: main
+  repo-url: "https://github.com/nakamura196/ruler_calc"
