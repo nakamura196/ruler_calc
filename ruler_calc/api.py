@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import japanize_matplotlib
 
-# %% ../api.ipynb 5
+# %% ../api.ipynb 4
 class Ruler:
     def __init__(self, path, tmp_dir = "tmp", isHorizontal = True):
         self.input_path = path
@@ -43,11 +43,11 @@ class Ruler:
         rotate_path = self.tmp_dir + "/rotate.jpg"
         Ruler.rotate(self.input_path, rotate_path)
 
-        # otsu_path = self.tmp_dir + "/otsu.jpg"
-        # Ruler.otsu_s(rotate_path, otsu_path)
+        blur_path = self.tmp_dir + "/blur.jpg"
+        Ruler.blur(rotate_path, blur_path)
         
         ad_path = self.tmp_dir + "/ad.jpg"
-        Ruler.ad_s(rotate_path, ad_path)
+        Ruler.ad_s(blur_path, ad_path)
 
         otsu_path = ad_path
         
@@ -80,15 +80,9 @@ class Ruler:
         result_path = self.tmp_dir + "/result.jpg"
         Ruler.write_lines(rotate_path, result_path, pixelPerMM)
 
-        self.cm_path = result_path # output_path
+        self.cm_path = result_path
 
         self.pixelPerMM = pixelPerMM
-
-        # self.canny()
-        # self.otsu()
-        # self.skelton()
-        # self.hlsd()
-        # self.get_info()
 
     @staticmethod
     def get_line(path):
@@ -237,6 +231,11 @@ class Ruler:
         rotated = cv2.warpAffine(image, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
 
         cv2.imwrite(output_path, rotated)
+
+    def blur(input_path, output_path):
+        img = cv2.imread(input_path)
+        blur = cv2.blur(img, (3, 3))
+        cv2.imwrite(output_path, blur)
 
     def canny_s(input_path, output_path):
         '''
