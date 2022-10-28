@@ -1,0 +1,121 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ruler_calc",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation."
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "ruler_calc",
+    "section": "Install",
+    "text": "Install\npip install ruler_calc"
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "ruler_calc",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:"
+  },
+  {
+    "objectID": "index.html#例1",
+    "href": "index.html#例1",
+    "title": "ruler_calc",
+    "section": "例1",
+    "text": "例1\n\npath = \"data/612110.jpeg\"\ntask_id = 1\nplt.imshow(mpimg.imread(path),cmap=\"gray\")\n\n<matplotlib.image.AxesImage at 0x7ff3bdc98490>\n\n\n\n\n\n\nresult = r.calc(path, task_id)\nshow(result)\n\n1 mm = 3 pixels\n入力画像のサイズ: 187 mm x 140 mm\n\n\n\nplt.imshow(mpimg.imread(result[\"path\"]),cmap=\"gray\")\n\n<matplotlib.image.AxesImage at 0x7ff3af337710>"
+  },
+  {
+    "objectID": "index.html#例2",
+    "href": "index.html#例2",
+    "title": "ruler_calc",
+    "section": "例2",
+    "text": "例2\n\npath = \"data/IiReU.jpeg\"\nplt.imshow(mpimg.imread(path),cmap=\"gray\")\ntask_id = 2\n\n\n\n\n\nresult = r.calc(path, task_id)\nshow(result)\n\n1 mm = 8 pixels\n入力画像のサイズ: 75 mm x 32 mm\n\n\n\nplt.imshow(mpimg.imread(result[\"path\"]),cmap=\"gray\")\n\n<matplotlib.image.AxesImage at 0x7ff32befdad0>"
+  },
+  {
+    "objectID": "index.html#例3",
+    "href": "index.html#例3",
+    "title": "ruler_calc",
+    "section": "例3",
+    "text": "例3\n\npath = \"data/IiReU_2.jpeg\"\nplt.imshow(mpimg.imread(path),cmap=\"gray\")\ntask_id = 4\n\n\n\n\n\nresult = r.calc(path, task_id)\nshow(result)\n\n1 mm = 8 pixels\n入力画像のサイズ: 75 mm x 32 mm\n\n\n\nplt.imshow(mpimg.imread(result[\"path\"]),cmap=\"gray\")\n\n<matplotlib.image.AxesImage at 0x7ff32bb08c10>"
+  },
+  {
+    "objectID": "index.html#例4",
+    "href": "index.html#例4",
+    "title": "ruler_calc",
+    "section": "例4",
+    "text": "例4\n\npath = \"data/0e067eb07d7b435ce8b1074513efd41a.jpeg\"\ntask_id = 3\nplt.imshow(mpimg.imread(path),cmap=\"gray\")\n\n<matplotlib.image.AxesImage at 0x7ff31c4bfd10>\n\n\n\n\n\n\nresult = r.calc(path, task_id)\nshow(result)\n\n1 mm = 16 pixels\n入力画像のサイズ: 191 mm x 15 mm\n\n\n\nplt.imshow(mpimg.imread(result[\"path\"]),cmap=\"gray\")\n\n<matplotlib.image.AxesImage at 0x7ff32bb90b10>"
+  },
+  {
+    "objectID": "index.html#例5",
+    "href": "index.html#例5",
+    "title": "ruler_calc",
+    "section": "例5",
+    "text": "例5\n\npath = \"data/ndl.png\"\ntask_id = 5\nplt.imshow(mpimg.imread(path),cmap=\"gray\")\n\n<matplotlib.image.AxesImage at 0x7ff31c920a90>\n\n\n\n\n\n\nresult = r.calc(path, task_id)\nshow(result)\n\n1 mm = 15 pixels\n入力画像のサイズ: 98 mm x 16 mm\n\n\n\nplt.imshow(mpimg.imread(result[\"path\"]),cmap=\"gray\")\n\n<matplotlib.image.AxesImage at 0x7ff3bdc5cd90>"
+  },
+  {
+    "objectID": "index.html#例6",
+    "href": "index.html#例6",
+    "title": "ruler_calc",
+    "section": "例6",
+    "text": "例6\n\npath = \"data/hi2.png\"\ntask_id = 6\nplt.imshow(mpimg.imread(path),cmap=\"gray\")\n\n<matplotlib.image.AxesImage at 0x7ff32bbc0350>\n\n\n\n\n\n\nresult = r.calc(path, task_id)\nshow(result)\n\n1 mm = 14 pixels\n入力画像のサイズ: 106 mm x 11 mm\n\n\n\nplt.imshow(mpimg.imread(result[\"path\"]),cmap=\"gray\")\n\n<matplotlib.image.AxesImage at 0x7ff31cbdf610>"
+  },
+  {
+    "objectID": "api.html",
+    "href": "api.html",
+    "title": "api",
+    "section": "",
+    "text": "def show_img(path):\n    plt.imshow(mpimg.imread(path),cmap=\"gray\")\nsource"
+  },
+  {
+    "objectID": "api.html#傾き補正",
+    "href": "api.html#傾き補正",
+    "title": "api",
+    "section": "傾き補正",
+    "text": "傾き補正\n\nsource\n\nRuler.rotate\n\n Ruler.rotate (input_path, output_path)\n\n\nrotate_path = \"tmp/rotate.jpg\"\nRuler.rotate(path, rotate_path)\nshow_img(rotate_path)"
+  },
+  {
+    "objectID": "api.html#平滑か",
+    "href": "api.html#平滑か",
+    "title": "api",
+    "section": "平滑か",
+    "text": "平滑か\n\nblur_path = \"tmp/blur.jpg\"\nRuler.blur(rotate_path, blur_path)\nshow_img(blur_path)"
+  },
+  {
+    "objectID": "api.html#二値化",
+    "href": "api.html#二値化",
+    "title": "api",
+    "section": "二値化",
+    "text": "二値化\n\nsource\n\nRuler.ad_s\n\n Ruler.ad_s (input_path, output_path)\n\nadaptiveThreshold\n\notsu_path = \"tmp/otsu.jpg\"\nRuler.ad_s(blur_path, otsu_path)\nshow_img(otsu_path)"
+  },
+  {
+    "objectID": "api.html#細線化",
+    "href": "api.html#細線化",
+    "title": "api",
+    "section": "細線化",
+    "text": "細線化\n\nsource\n\nRuler.skelton_s\n\n Ruler.skelton_s (input_path, output_path, reverse=False, basic=True)\n\n\nsaisen_path = \"tmp/saisen.jpg\"\nRuler.skelton_s(otsu_path, saisen_path)\nshow_img(saisen_path)"
+  },
+  {
+    "objectID": "api.html#変化がもっとも多いy軸の値を取得する",
+    "href": "api.html#変化がもっとも多いy軸の値を取得する",
+    "title": "api",
+    "section": "変化がもっとも多いy軸の値を取得する",
+    "text": "変化がもっとも多いy軸の値を取得する\n\nsource\n\nRuler.get_line\n\n Ruler.get_line (path)\n\n\nx_index, x_values, y_values = Ruler.get_line(saisen_path)\nRuler.show_xy(x_values, y_values, title=\"画像のy軸の値と1と0の変化の数の関係\", xlabel=\"画像のy軸の値\", ylabel=\"1と0の変化の数\")"
+  },
+  {
+    "objectID": "api.html#横線をひく",
+    "href": "api.html#横線をひく",
+    "title": "api",
+    "section": "横線をひく",
+    "text": "横線をひく\n\nsource\n\nRuler.write_line\n\n Ruler.write_line (path, output_path, i, isHorizontal=True)\n\n\nline_path = \"tmp/line.jpg\"\nRuler.write_line(saisen_path, line_path, x_index)\nshow_img(line_path)\n\n\n\n\n\nsource\n\n\nRuler.save_row_img\n\n Ruler.save_row_img (path, output_path, i, isHorizontal=True)\n\n\nrow_path = \"tmp/row.jpg\"\nRuler.save_row_img(saisen_path, row_path, x_index)\n# show_img(row_path)"
+  },
+  {
+    "objectID": "api.html#行画像から間隔を取得する",
+    "href": "api.html#行画像から間隔を取得する",
+    "title": "api",
+    "section": "行画像から間隔を取得する",
+    "text": "行画像から間隔を取得する\n\nsource\n\nRuler.get_ws\n\n Ruler.get_ws (path)\n\n\nfreq, ws = Ruler.get_ws(row_path)\n\n\nx_values, y_values = Ruler.show_freq(freq)\n\n\nRuler.show_xy(x_values, y_values, title=\"点の間隔と頻度の関係\", xlabel=\"点の間隔\", ylabel=\"頻度\")\n\n\n\n\n\nsource\n\n\nRuler.get_pixel_per_mm\n\n Ruler.get_pixel_per_mm (ws)\n\n\npixelPerMM = Ruler.get_pixel_per_mm(ws)\n\nprint(\"pixelPerMM\", pixelPerMM)\n\npixelPerMM 12\n\n\n\n## 結果を表示\n\n\nsource\n\n\nRuler.write_lines\n\n Ruler.write_lines (path, output_path, pixelPerMM)\n\n\nresult_path = \"tmp/result.jpg\"\nRuler.write_lines(rotate_path, result_path, pixelPerMM)\nshow_img(result_path)"
+  }
+]
